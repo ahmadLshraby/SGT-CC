@@ -36,14 +36,24 @@ public final class AppDIContainer: ObservableObject {
     public func makePopularMoviesViewModel() -> PopularMoviesViewModel {
         return PopularMoviesViewModel(useCase: makePopularMoviesUseCase())
     }
+    public func makeMovieDetailsViewModel(movieID: Int) -> MovieDetailsViewModel {
+        return MovieDetailsViewModel(useCase: makeMovieDetailsUseCase(),
+                                     movieID: movieID)
+    }
     
     // MARK: - Use Cases
     public func makePopularMoviesUseCase() -> PopularMoviesUseCase {
         return PopularMoviesUseCaseImp(repository: makePopularMoviesRepository())
     }
+    public func makeMovieDetailsUseCase() -> MovieDetailsUseCase {
+        return MovieDetailsUseCaseImp(repository: makeMovieDetailsRepository())
+    }
     
     // MARK: - Repositories
     public func makePopularMoviesRepository() -> PopularMoviesRepository {
         return DefaultPopularMovies(apiClient: APIClient())
+    }
+    public func makeMovieDetailsRepository() -> MovieDetailsRepository {
+        return DefaultMovieDetails(apiClient: APIClient())
     }
 }

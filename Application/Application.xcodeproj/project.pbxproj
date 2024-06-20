@@ -13,6 +13,7 @@
 		18EC10092C22CE5900BC84FB /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18EC10082C22CE5800BC84FB /* Core.framework */; };
 		18EC100A2C22CE5900BC84FB /* Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 18EC10082C22CE5800BC84FB /* Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		18FF01E92C22F6360071E39E /* PopularMoviesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FF01E82C22F6360071E39E /* PopularMoviesViewModel.swift */; };
+		18FF02162C24CAD30071E39E /* MovieDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FF02152C24CAD30071E39E /* MovieDetailsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		18EC0FBA2C22CDEF00BC84FB /* ApplicationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationTests.swift; sourceTree = "<group>"; };
 		18EC10082C22CE5800BC84FB /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		18FF01E82C22F6360071E39E /* PopularMoviesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviesViewModel.swift; sourceTree = "<group>"; };
+		18FF02152C24CAD30071E39E /* MovieDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				18FF01E82C22F6360071E39E /* PopularMoviesViewModel.swift */,
+				18FF02152C24CAD30071E39E /* MovieDetailsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -231,6 +234,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18FF02162C24CAD30071E39E /* MovieDetailsViewModel.swift in Sources */,
 				18FF01E92C22F6360071E39E /* PopularMoviesViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

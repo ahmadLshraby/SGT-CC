@@ -19,6 +19,9 @@
 		18FF01F12C22F8AD0071E39E /* Infrastructure.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 18EC10012C22CE1D00BC84FB /* Infrastructure.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		18FF01F72C22FFA70071E39E /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FF01F62C22FFA70071E39E /* AppDIContainer.swift */; };
 		18FF01F92C2300760071E39E /* AppDIContainerEnvironmentKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FF01F82C2300750071E39E /* AppDIContainerEnvironmentKey.swift */; };
+		18FF01FF2C241EEE0071E39E /* MovieRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FF01FE2C241EEE0071E39E /* MovieRowView.swift */; };
+		18FF02052C241F7A0071E39E /* MovieDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FF02042C241F7A0071E39E /* MovieDetailView.swift */; };
+		18FF02072C241FE30071E39E /* StrechyHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FF02062C241FE30071E39E /* StrechyHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +83,9 @@
 		18FF01F22C22FCE00071E39E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		18FF01F62C22FFA70071E39E /* AppDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDIContainer.swift; sourceTree = "<group>"; };
 		18FF01F82C2300750071E39E /* AppDIContainerEnvironmentKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDIContainerEnvironmentKey.swift; sourceTree = "<group>"; };
+		18FF01FE2C241EEE0071E39E /* MovieRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRowView.swift; sourceTree = "<group>"; };
+		18FF02042C241F7A0071E39E /* MovieDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailView.swift; sourceTree = "<group>"; };
+		18FF02062C241FE30071E39E /* StrechyHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrechyHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +172,9 @@
 				18FF01FA2C23019F0071E39E /* DI */,
 				18EC0F7B2C22CD5700BC84FB /* SGT_CCApp.swift */,
 				18EC0F7D2C22CD5700BC84FB /* PopularMoviesView.swift */,
+				18FF01FE2C241EEE0071E39E /* MovieRowView.swift */,
+				18FF02042C241F7A0071E39E /* MovieDetailView.swift */,
+				18FF02062C241FE30071E39E /* StrechyHeaderView.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -310,9 +319,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18FF02052C241F7A0071E39E /* MovieDetailView.swift in Sources */,
+				18FF02072C241FE30071E39E /* StrechyHeaderView.swift in Sources */,
 				18FF01F92C2300760071E39E /* AppDIContainerEnvironmentKey.swift in Sources */,
 				18EC0F7E2C22CD5700BC84FB /* PopularMoviesView.swift in Sources */,
 				18EC0F7C2C22CD5700BC84FB /* SGT_CCApp.swift in Sources */,
+				18FF01FF2C241EEE0071E39E /* MovieRowView.swift in Sources */,
 				18FF01F72C22FFA70071E39E /* AppDIContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

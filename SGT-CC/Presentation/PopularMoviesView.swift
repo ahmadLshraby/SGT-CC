@@ -11,6 +11,7 @@ import Application
 struct PopularMoviesView: View {
     @Environment(\.appDIContainer) private var container: AppDIContainer
     @ObservedObject private var viewModel: PopularMoviesViewModel
+    @State private var showAlert = false
 
     init(viewModel: PopularMoviesViewModel) {
         self.viewModel = viewModel
@@ -18,26 +19,51 @@ struct PopularMoviesView: View {
     
     var body: some View {
         NavigationView {
-            List(viewModel.movies) { movie in
-//                NavigationLink(destination: MovieDetailView(movie: movie)) {
-                    HStack {
-                        AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w200\(movie.posterPath ?? "")"))
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 100)
-                        VStack(alignment: .leading) {
-                            Text(movie.title ?? "Title")
-                                .font(.headline)
-                                .multilineTextAlignment(.center)
-                                .lineLimit(2)
-                            Text(movie.releaseDate ?? "Date")
-                                .font(.subheadline)
+            VStack {
+                if !viewModel.movies.isEmpty {
+                    List {
+                        ForEach(viewModel.movies) { movie in
+                            NavigationLink {
+                                MovieDetailView(viewModel: container.makeMovieDetailsViewModel(movieID: movie.id))
+                                    .environment(\.appDIContainer, container)
+                            } label: {
+                                MovieRowView(movie: movie)
+                            }
+                            .onAppear {
+                                if movie == viewModel.movies.last && viewModel.canLoadMore && !viewModel.isLoading {
+                                    viewModel.fetchNextPage()
+                                }
+                            }
+                        }
+                        if viewModel.isLoading {
+                            ProgressView()
+                                .frame(maxWidth: .infinity, alignment: .center)
                         }
                     }
-//                }
+                    .listStyle(.plain)
+                } else if viewModel.isLoading {
+                    ProgressView()
+                        .scaleEffect(2)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                }
             }
             .navigationTitle("Popular Movies")
             .onAppear {
                 viewModel.fetchPopularMovies()
+            }
+            .alert(isPresented: $showAlert) {
+                Alert(
+                    title: Text("Error"),
+                    message: Text(viewModel.errorMessage ?? "Unknown error"),
+                    dismissButton: .default(Text("OK"), action: {
+                        viewModel.errorMessage = nil
+                    })
+                )
+            }
+        }
+        .onChange(of: viewModel.errorMessage) { _ in
+            if viewModel.errorMessage != nil {
+                showAlert = true
             }
         }
     }
