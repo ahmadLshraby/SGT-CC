@@ -10,6 +10,8 @@
 		18EC0FF62C22CE1C00BC84FB /* Infrastructure.h in Headers */ = {isa = PBXBuildFile; fileRef = 18EC0FF52C22CE1C00BC84FB /* Infrastructure.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		18EC10042C22CE5100BC84FB /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18EC10032C22CE5100BC84FB /* Core.framework */; };
 		18EC10052C22CE5100BC84FB /* Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 18EC10032C22CE5100BC84FB /* Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		18FF01DA2C22EBD30071E39E /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FF01D92C22EBD30071E39E /* APIClient.swift */; };
+		18FF01E72C22F4EA0071E39E /* DefaultPopularMovies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FF01E62C22F4EA0071E39E /* DefaultPopularMovies.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -30,6 +32,8 @@
 		18EC0FF22C22CE1C00BC84FB /* Infrastructure.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Infrastructure.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		18EC0FF52C22CE1C00BC84FB /* Infrastructure.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Infrastructure.h; sourceTree = "<group>"; };
 		18EC10032C22CE5100BC84FB /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		18FF01D92C22EBD30071E39E /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		18FF01E62C22F4EA0071E39E /* DefaultPopularMovies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPopularMovies.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +86,7 @@
 		18EC101B2C22CF6700BC84FB /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				18FF01D92C22EBD30071E39E /* APIClient.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -89,6 +94,7 @@
 		18EC101D2C22D1D500BC84FB /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				18FF01E62C22F4EA0071E39E /* DefaultPopularMovies.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -137,6 +143,7 @@
 				TargetAttributes = {
 					18EC0FF12C22CE1C00BC84FB = {
 						CreatedOnToolsVersion = 15.1;
+						LastSwiftMigration = 1510;
 					};
 				};
 			};
@@ -173,6 +180,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18FF01E72C22F4EA0071E39E /* DefaultPopularMovies.swift in Sources */,
+				18FF01DA2C22EBD30071E39E /* APIClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,6 +316,7 @@
 		18EC0FFA2C22CE1C00BC84FB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -332,6 +342,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -340,6 +351,7 @@
 		18EC0FFB2C22CE1C00BC84FB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;

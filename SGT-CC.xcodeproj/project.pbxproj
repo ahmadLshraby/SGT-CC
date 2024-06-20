@@ -8,9 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		18EC0F7C2C22CD5700BC84FB /* SGT_CCApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EC0F7B2C22CD5700BC84FB /* SGT_CCApp.swift */; };
-		18EC0F7E2C22CD5700BC84FB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EC0F7D2C22CD5700BC84FB /* ContentView.swift */; };
+		18EC0F7E2C22CD5700BC84FB /* PopularMoviesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EC0F7D2C22CD5700BC84FB /* PopularMoviesView.swift */; };
 		18EC0F802C22CD5700BC84FB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18EC0F7F2C22CD5700BC84FB /* Assets.xcassets */; };
 		18EC0F832C22CD5700BC84FB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18EC0F822C22CD5700BC84FB /* Preview Assets.xcassets */; };
+		18FF01EB2C22F8A60071E39E /* Application.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18EC0FCB2C22CDF000BC84FB /* Application.framework */; };
+		18FF01EC2C22F8A60071E39E /* Application.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 18EC0FCB2C22CDF000BC84FB /* Application.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		18FF01EE2C22F8AA0071E39E /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18EC0FE72C22CE0700BC84FB /* Core.framework */; };
+		18FF01EF2C22F8AA0071E39E /* Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 18EC0FE72C22CE0700BC84FB /* Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		18FF01F02C22F8AD0071E39E /* Infrastructure.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18EC10012C22CE1D00BC84FB /* Infrastructure.framework */; };
+		18FF01F12C22F8AD0071E39E /* Infrastructure.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 18EC10012C22CE1D00BC84FB /* Infrastructure.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		18FF01F72C22FFA70071E39E /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FF01F62C22FFA70071E39E /* AppDIContainer.swift */; };
+		18FF01F92C2300760071E39E /* AppDIContainerEnvironmentKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FF01F82C2300750071E39E /* AppDIContainerEnvironmentKey.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,15 +52,34 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		18FF01ED2C22F8A70071E39E /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				18FF01F12C22F8AD0071E39E /* Infrastructure.framework in Embed Frameworks */,
+				18FF01EC2C22F8A60071E39E /* Application.framework in Embed Frameworks */,
+				18FF01EF2C22F8AA0071E39E /* Core.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		18EC0F782C22CD5700BC84FB /* SGT-CC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SGT-CC.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18EC0F7B2C22CD5700BC84FB /* SGT_CCApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SGT_CCApp.swift; sourceTree = "<group>"; };
-		18EC0F7D2C22CD5700BC84FB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		18EC0F7D2C22CD5700BC84FB /* PopularMoviesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviesView.swift; sourceTree = "<group>"; };
 		18EC0F7F2C22CD5700BC84FB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18EC0F822C22CD5700BC84FB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		18EC0FC52C22CDEF00BC84FB /* Application.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Application.xcodeproj; path = Application/Application.xcodeproj; sourceTree = SOURCE_ROOT; };
 		18EC0FE22C22CE0700BC84FB /* Core.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Core.xcodeproj; path = Core/Core.xcodeproj; sourceTree = SOURCE_ROOT; };
 		18EC0FFC2C22CE1C00BC84FB /* Infrastructure.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Infrastructure.xcodeproj; path = Infrastructure/Infrastructure.xcodeproj; sourceTree = SOURCE_ROOT; };
+		18FF01F22C22FCE00071E39E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		18FF01F62C22FFA70071E39E /* AppDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDIContainer.swift; sourceTree = "<group>"; };
+		18FF01F82C2300750071E39E /* AppDIContainerEnvironmentKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDIContainerEnvironmentKey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +87,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18FF01F02C22F8AD0071E39E /* Infrastructure.framework in Frameworks */,
+				18FF01EB2C22F8A60071E39E /* Application.framework in Frameworks */,
+				18FF01EE2C22F8AA0071E39E /* Core.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +101,7 @@
 			children = (
 				18EC0F7A2C22CD5700BC84FB /* SGT-CC */,
 				18EC0F792C22CD5700BC84FB /* Products */,
+				18FF01EA2C22F8A60071E39E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -85,6 +116,7 @@
 		18EC0F7A2C22CD5700BC84FB /* SGT-CC */ = {
 			isa = PBXGroup;
 			children = (
+				18FF01F22C22FCE00071E39E /* Info.plist */,
 				18EC0FFC2C22CE1C00BC84FB /* Infrastructure.xcodeproj */,
 				18EC0FE22C22CE0700BC84FB /* Core.xcodeproj */,
 				18EC0FC52C22CDEF00BC84FB /* Application.xcodeproj */,
@@ -131,8 +163,9 @@
 			isa = PBXGroup;
 			children = (
 				18EC10222C22D26000BC84FB /* Resources */,
+				18FF01FA2C23019F0071E39E /* DI */,
 				18EC0F7B2C22CD5700BC84FB /* SGT_CCApp.swift */,
-				18EC0F7D2C22CD5700BC84FB /* ContentView.swift */,
+				18EC0F7D2C22CD5700BC84FB /* PopularMoviesView.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -145,6 +178,22 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		18FF01EA2C22F8A60071E39E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		18FF01FA2C23019F0071E39E /* DI */ = {
+			isa = PBXGroup;
+			children = (
+				18FF01F62C22FFA70071E39E /* AppDIContainer.swift */,
+				18FF01F82C2300750071E39E /* AppDIContainerEnvironmentKey.swift */,
+			);
+			path = DI;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -155,6 +204,7 @@
 				18EC0F742C22CD5700BC84FB /* Sources */,
 				18EC0F752C22CD5700BC84FB /* Frameworks */,
 				18EC0F762C22CD5700BC84FB /* Resources */,
+				18FF01ED2C22F8A70071E39E /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -260,8 +310,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18EC0F7E2C22CD5700BC84FB /* ContentView.swift in Sources */,
+				18FF01F92C2300760071E39E /* AppDIContainerEnvironmentKey.swift in Sources */,
+				18EC0F7E2C22CD5700BC84FB /* PopularMoviesView.swift in Sources */,
 				18EC0F7C2C22CD5700BC84FB /* SGT_CCApp.swift in Sources */,
+				18FF01F72C22FFA70071E39E /* AppDIContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,13 +442,16 @@
 		18EC0F872C22CD5700BC84FB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ACCESS_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5MDVmZGMzNTdkNGY3ZGI5YzhkNGU5YjNiYTI1M2M3ZCIsInN1YiI6IjVjOGY3ZjFlMGUwYTI2NjIzNzU1YzRlOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.IJV907H9MJ7b5pgnFrb-zYXRoXtXbtlUH37P-3BrePU";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				BASE_URL = "https://api.themoviedb.org/3/";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SGT-CC/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "SGT-CC/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -418,13 +473,16 @@
 		18EC0F882C22CD5700BC84FB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ACCESS_TOKEN = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5MDVmZGMzNTdkNGY3ZGI5YzhkNGU5YjNiYTI1M2M3ZCIsInN1YiI6IjVjOGY3ZjFlMGUwYTI2NjIzNzU1YzRlOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.IJV907H9MJ7b5pgnFrb-zYXRoXtXbtlUH37P-3BrePU";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				BASE_URL = "https://api.themoviedb.org/3/";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SGT-CC/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "SGT-CC/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

@@ -12,6 +12,7 @@
 		18EC0FBC2C22CDEF00BC84FB /* Application.h in Headers */ = {isa = PBXBuildFile; fileRef = 18EC0FB02C22CDEF00BC84FB /* Application.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		18EC10092C22CE5900BC84FB /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18EC10082C22CE5800BC84FB /* Core.framework */; };
 		18EC100A2C22CE5900BC84FB /* Core.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 18EC10082C22CE5800BC84FB /* Core.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		18FF01E92C22F6360071E39E /* PopularMoviesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FF01E82C22F6360071E39E /* PopularMoviesViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		18EC0FB52C22CDEF00BC84FB /* ApplicationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ApplicationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		18EC0FBA2C22CDEF00BC84FB /* ApplicationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationTests.swift; sourceTree = "<group>"; };
 		18EC10082C22CE5800BC84FB /* Core.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Core.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		18FF01E82C22F6360071E39E /* PopularMoviesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviesViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 		18EC101A2C22CF4900BC84FB /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				18FF01E82C22F6360071E39E /* PopularMoviesViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -180,6 +183,7 @@
 				TargetAttributes = {
 					18EC0FAC2C22CDEF00BC84FB = {
 						CreatedOnToolsVersion = 15.1;
+						LastSwiftMigration = 1510;
 					};
 					18EC0FB42C22CDEF00BC84FB = {
 						CreatedOnToolsVersion = 15.1;
@@ -227,6 +231,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18FF01E92C22F6360071E39E /* PopularMoviesViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,6 +382,7 @@
 		18EC0FC02C22CDEF00BC84FB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -402,6 +408,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -410,6 +417,7 @@
 		18EC0FC12C22CDEF00BC84FB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -443,6 +451,7 @@
 		18EC0FC32C22CDEF00BC84FB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -458,6 +467,7 @@
 		18EC0FC42C22CDEF00BC84FB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;

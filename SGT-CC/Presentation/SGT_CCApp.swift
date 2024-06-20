@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct SGT_CCApp: App {
+    let container = AppDIContainer.shared()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            PopularMoviesView(viewModel: container.makePopularMoviesViewModel())
+                .environment(\.appDIContainer, container)
         }
     }
 }
