@@ -5,7 +5,7 @@
 # Table of Contents
 + [About](#about)
 + [Implementation](#implementation)
-+ [Public GitHub endpoints](#endpoints)
++ [Public endpoints](#endpoints)
 
 ---
 
@@ -31,7 +31,7 @@
   
 ---
 
-## Public Flickr endpoints <a name = "endpoints"></a>
+## Public endpoints <a name = "endpoints"></a>
 - Base URL: https://api.themoviedb.org/3/
 - movie/now_playing?language=en-US&page=**XXX**
 - movie/**XXX**?language=en-US
