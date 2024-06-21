@@ -32,4 +32,6 @@
 ---
 
 ## Public Flickr endpoints <a name = "endpoints"></a>
-- https://developer.themoviedb.org/reference/movie-now-playing-list
+- Base URL: https://api.themoviedb.org/3/
+- movie/now_playing?language=en-US&page=**XXX**
+- movie/**XXX**?language=en-US
