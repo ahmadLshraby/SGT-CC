@@ -13,6 +13,7 @@ struct MovieDetailView: View {
     @Environment(\.appDIContainer) private var container: AppDIContainer
     @ObservedObject private var viewModel: MovieDetailsViewModel
     @Environment(\.presentationMode) var presentationMode
+    @State private var showAlert = false
     
     init(viewModel: MovieDetailsViewModel) {
         self.viewModel = viewModel
@@ -177,6 +178,20 @@ struct MovieDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             viewModel.getMovieDetails()
+        }
+        .alert(isPresented: $showAlert) {
+            Alert(
+                title: Text("Error"),
+                message: Text(viewModel.errorMessage ?? "Unknown error"),
+                dismissButton: .default(Text("OK"), action: {
+                    viewModel.errorMessage = nil
+                })
+            )
+        }
+        .onChange(of: viewModel.errorMessage) { _ in
+            if viewModel.errorMessage != nil {
+                showAlert = true
+            }
         }
     }
 }
