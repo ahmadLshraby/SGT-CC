@@ -23,7 +23,8 @@ public final class APIClient: APIContract {
               "PATH: \(endPoint.path)\n",
               "METHOD: \(endPoint.method.rawValue)\n",
               "PARAMETERS: \(endPoint.parameters ?? ["parameters": "NO"])\n",
-              "HEADERS: \(endPoint.headers ?? ["headers": "NO"])\n")
+              "HEADERS: \(endPoint.headers ?? ["headers": "NO"])\n",
+              "*****END*****")
         
         // Create URL request
         guard let url = URL(string: endPoint.path) else {

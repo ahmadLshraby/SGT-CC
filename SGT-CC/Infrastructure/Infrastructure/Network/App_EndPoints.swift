@@ -32,17 +32,17 @@ enum App_EndPoints {
         }
         
         var headers: [String : Any]? {
-            switch self {
-            default:
-                return nil
-            }
-        }
-        
-        var parameters: [String : Any]? {
             let token = Bundle.main.object(forInfoDictionaryKey: "ACCESS_TOKEN") as? String ?? "Not found"
             switch self {
             default:
                 return ["Authorization": "Bearer \(token)"]
+            }
+        }
+        
+        var parameters: [String : Any]? {
+            switch self {
+            default:
+                return nil
             }
         }
     }
