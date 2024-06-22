@@ -1,0 +1,603 @@
+{
+    "non-test-frameworks": [
+        {
+            "Application": {
+                "loc": 102,
+                "noc": 24,
+                "poc": 19.048,
+                "n_a": 0,
+                "n_c": 4,
+                "nom": 5,
+                "not": 0,
+                "noi": 4,
+                "analysis": "The code is under commented. Low abstract component, few interfaces. ",
+                "dependencies": [
+                    "Core(4)"
+                ],
+                "submodules": {
+                    "Application": {
+                        "n_of_files": 4,
+                        "metric": {
+                            "loc": 102,
+                            "noc": 24,
+                            "n_a": 0,
+                            "n_c": 4,
+                            "nom": 5,
+                            "not": 0,
+                            "poc": 19.048
+                        },
+                        "submodules": [
+                            {
+                                "Application": {
+                                    "n_of_files": 4,
+                                    "metric": {
+                                        "loc": 102,
+                                        "noc": 24,
+                                        "n_a": 0,
+                                        "n_c": 4,
+                                        "nom": 5,
+                                        "not": 0,
+                                        "poc": 19.048
+                                    },
+                                    "submodules": [
+                                        {
+                                            "Application": {
+                                                "n_of_files": 4,
+                                                "metric": {
+                                                    "loc": 102,
+                                                    "noc": 24,
+                                                    "n_a": 0,
+                                                    "n_c": 4,
+                                                    "nom": 5,
+                                                    "not": 0,
+                                                    "poc": 19.048
+                                                },
+                                                "submodules": [
+                                                    {
+                                                        "ViewModels": {
+                                                            "n_of_files": 2,
+                                                            "metric": {
+                                                                "loc": 78,
+                                                                "noc": 12,
+                                                                "n_a": 0,
+                                                                "n_c": 2,
+                                                                "nom": 3,
+                                                                "not": 0,
+                                                                "poc": 13.333
+                                                            },
+                                                            "submodules": []
+                                                        }
+                                                    },
+                                                    {
+                                                        "UseCases": {
+                                                            "n_of_files": 2,
+                                                            "metric": {
+                                                                "loc": 24,
+                                                                "noc": 12,
+                                                                "n_a": 0,
+                                                                "n_c": 2,
+                                                                "nom": 2,
+                                                                "not": 0,
+                                                                "poc": 33.333
+                                                            },
+                                                            "submodules": []
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                "fan_in": 3,
+                "fan_out": 4,
+                "i": 0.571,
+                "a": 0.0,
+                "d_3": 0.429
+            }
+        },
+        {
+            "Core": {
+                "loc": 201,
+                "noc": 66,
+                "poc": 24.719,
+                "n_a": 5,
+                "n_c": 6,
+                "nom": 6,
+                "not": 0,
+                "noi": 0,
+                "analysis": "Highly stable component (hard to change, responsible and independent). High abstract component, few concrete data structures. ",
+                "dependencies": [],
+                "submodules": {
+                    "Core": {
+                        "n_of_files": 10,
+                        "metric": {
+                            "loc": 201,
+                            "noc": 66,
+                            "n_a": 5,
+                            "n_c": 6,
+                            "nom": 6,
+                            "not": 0,
+                            "poc": 24.719
+                        },
+                        "submodules": [
+                            {
+                                "Core": {
+                                    "n_of_files": 10,
+                                    "metric": {
+                                        "loc": 201,
+                                        "noc": 66,
+                                        "n_a": 5,
+                                        "n_c": 6,
+                                        "nom": 6,
+                                        "not": 0,
+                                        "poc": 24.719
+                                    },
+                                    "submodules": [
+                                        {
+                                            "Core": {
+                                                "n_of_files": 10,
+                                                "metric": {
+                                                    "loc": 201,
+                                                    "noc": 66,
+                                                    "n_a": 5,
+                                                    "n_c": 6,
+                                                    "nom": 6,
+                                                    "not": 0,
+                                                    "poc": 24.719
+                                                },
+                                                "submodules": [
+                                                    {
+                                                        "Contracts": {
+                                                            "n_of_files": 5,
+                                                            "metric": {
+                                                                "loc": 28,
+                                                                "noc": 30,
+                                                                "n_a": 5,
+                                                                "n_c": 0,
+                                                                "nom": 5,
+                                                                "not": 0,
+                                                                "poc": 51.724
+                                                            },
+                                                            "submodules": [
+                                                                {
+                                                                    "Application": {
+                                                                        "n_of_files": 2,
+                                                                        "metric": {
+                                                                            "loc": 10,
+                                                                            "noc": 12,
+                                                                            "n_a": 2,
+                                                                            "n_c": 0,
+                                                                            "nom": 2,
+                                                                            "not": 0,
+                                                                            "poc": 54.545
+                                                                        },
+                                                                        "submodules": [
+                                                                            {
+                                                                                "UseCases": {
+                                                                                    "n_of_files": 2,
+                                                                                    "metric": {
+                                                                                        "loc": 10,
+                                                                                        "noc": 12,
+                                                                                        "n_a": 2,
+                                                                                        "n_c": 0,
+                                                                                        "nom": 2,
+                                                                                        "not": 0,
+                                                                                        "poc": 54.545
+                                                                                    },
+                                                                                    "submodules": []
+                                                                                }
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "Infrastructure": {
+                                                                        "n_of_files": 3,
+                                                                        "metric": {
+                                                                            "loc": 18,
+                                                                            "noc": 18,
+                                                                            "n_a": 3,
+                                                                            "n_c": 0,
+                                                                            "nom": 3,
+                                                                            "not": 0,
+                                                                            "poc": 50.0
+                                                                        },
+                                                                        "submodules": [
+                                                                            {
+                                                                                "Repositories": {
+                                                                                    "n_of_files": 1,
+                                                                                    "metric": {
+                                                                                        "loc": 6,
+                                                                                        "noc": 6,
+                                                                                        "n_a": 1,
+                                                                                        "n_c": 0,
+                                                                                        "nom": 2,
+                                                                                        "not": 0,
+                                                                                        "poc": 50.0
+                                                                                    },
+                                                                                    "submodules": []
+                                                                                }
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "CustomTypes": {
+                                                            "n_of_files": 3,
+                                                            "metric": {
+                                                                "loc": 37,
+                                                                "noc": 18,
+                                                                "n_a": 0,
+                                                                "n_c": 0,
+                                                                "nom": 1,
+                                                                "not": 0,
+                                                                "poc": 32.727
+                                                            },
+                                                            "submodules": [
+                                                                {
+                                                                    "Enums": {
+                                                                        "n_of_files": 3,
+                                                                        "metric": {
+                                                                            "loc": 37,
+                                                                            "noc": 18,
+                                                                            "n_a": 0,
+                                                                            "n_c": 0,
+                                                                            "nom": 1,
+                                                                            "not": 0,
+                                                                            "poc": 32.727
+                                                                        },
+                                                                        "submodules": [
+                                                                            {
+                                                                                "Infrastructure": {
+                                                                                    "n_of_files": 3,
+                                                                                    "metric": {
+                                                                                        "loc": 37,
+                                                                                        "noc": 18,
+                                                                                        "n_a": 0,
+                                                                                        "n_c": 0,
+                                                                                        "nom": 1,
+                                                                                        "not": 0,
+                                                                                        "poc": 32.727
+                                                                                    },
+                                                                                    "submodules": []
+                                                                                }
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "Models": {
+                                                            "n_of_files": 2,
+                                                            "metric": {
+                                                                "loc": 136,
+                                                                "noc": 18,
+                                                                "n_a": 0,
+                                                                "n_c": 6,
+                                                                "nom": 0,
+                                                                "not": 0,
+                                                                "poc": 11.688
+                                                            },
+                                                            "submodules": [
+                                                                {
+                                                                    "DTOs": {
+                                                                        "n_of_files": 2,
+                                                                        "metric": {
+                                                                            "loc": 136,
+                                                                            "noc": 18,
+                                                                            "n_a": 0,
+                                                                            "n_c": 6,
+                                                                            "nom": 0,
+                                                                            "not": 0,
+                                                                            "poc": 11.688
+                                                                        },
+                                                                        "submodules": []
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                "fan_in": 10,
+                "fan_out": 0,
+                "i": 0.0,
+                "a": 0.833,
+                "d_3": 0.167
+            }
+        },
+        {
+            "Infrastructure": {
+                "loc": 118,
+                "noc": 23,
+                "poc": 16.312,
+                "n_a": 0,
+                "n_c": 2,
+                "nom": 3,
+                "not": 0,
+                "noi": 3,
+                "analysis": "The code is under commented. Low abstract component, few interfaces. ",
+                "dependencies": [
+                    "Core(3)"
+                ],
+                "submodules": {
+                    "Infrastructure": {
+                        "n_of_files": 3,
+                        "metric": {
+                            "loc": 118,
+                            "noc": 23,
+                            "n_a": 0,
+                            "n_c": 2,
+                            "nom": 3,
+                            "not": 0,
+                            "poc": 16.312
+                        },
+                        "submodules": [
+                            {
+                                "Infrastructure": {
+                                    "n_of_files": 3,
+                                    "metric": {
+                                        "loc": 118,
+                                        "noc": 23,
+                                        "n_a": 0,
+                                        "n_c": 2,
+                                        "nom": 3,
+                                        "not": 0,
+                                        "poc": 16.312
+                                    },
+                                    "submodules": [
+                                        {
+                                            "Infrastructure": {
+                                                "n_of_files": 3,
+                                                "metric": {
+                                                    "loc": 118,
+                                                    "noc": 23,
+                                                    "n_a": 0,
+                                                    "n_c": 2,
+                                                    "nom": 3,
+                                                    "not": 0,
+                                                    "poc": 16.312
+                                                },
+                                                "submodules": [
+                                                    {
+                                                        "Network": {
+                                                            "n_of_files": 2,
+                                                            "metric": {
+                                                                "loc": 101,
+                                                                "noc": 17,
+                                                                "n_a": 0,
+                                                                "n_c": 1,
+                                                                "nom": 1,
+                                                                "not": 0,
+                                                                "poc": 14.407
+                                                            },
+                                                            "submodules": []
+                                                        }
+                                                    },
+                                                    {
+                                                        "Repositories": {
+                                                            "n_of_files": 1,
+                                                            "metric": {
+                                                                "loc": 17,
+                                                                "noc": 6,
+                                                                "n_a": 0,
+                                                                "n_c": 1,
+                                                                "nom": 2,
+                                                                "not": 0,
+                                                                "poc": 26.087
+                                                            },
+                                                            "submodules": []
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                "fan_in": 1,
+                "fan_out": 3,
+                "i": 0.75,
+                "a": 0.0,
+                "d_3": 0.25
+            }
+        },
+        {
+            "Presentation": {
+                "loc": 366,
+                "noc": 51,
+                "poc": 12.23,
+                "n_a": 0,
+                "n_c": 9,
+                "nom": 7,
+                "not": 0,
+                "noi": 7,
+                "analysis": "The code is under commented. Highly unstable component (lack of dependents, easy to change, irresponsible) Low abstract component, few interfaces. ",
+                "dependencies": [
+                    "Application(3)",
+                    "Core(3)",
+                    "Infrastructure(1)"
+                ],
+                "submodules": {
+                    "Presentation": {
+                        "n_of_files": 7,
+                        "metric": {
+                            "loc": 366,
+                            "noc": 51,
+                            "n_a": 0,
+                            "n_c": 9,
+                            "nom": 7,
+                            "not": 0,
+                            "poc": 12.23
+                        },
+                        "submodules": [
+                            {
+                                "Presentation": {
+                                    "n_of_files": 7,
+                                    "metric": {
+                                        "loc": 366,
+                                        "noc": 51,
+                                        "n_a": 0,
+                                        "n_c": 9,
+                                        "nom": 7,
+                                        "not": 0,
+                                        "poc": 12.23
+                                    },
+                                    "submodules": [
+                                        {
+                                            "DI": {
+                                                "n_of_files": 2,
+                                                "metric": {
+                                                    "loc": 49,
+                                                    "noc": 15,
+                                                    "n_a": 0,
+                                                    "n_c": 4,
+                                                    "nom": 7,
+                                                    "not": 0,
+                                                    "poc": 23.438
+                                                },
+                                                "submodules": []
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                },
+                "fan_in": 0,
+                "fan_out": 7,
+                "i": 1.0,
+                "a": 0.0,
+                "d_3": 0.0
+            }
+        }
+    ],
+    "tests-frameworks": [
+        {
+            "Application_Test": {
+                "loc": 221,
+                "noc": 17,
+                "poc": 7.143,
+                "n_a": 0,
+                "n_c": 4,
+                "nom": 21,
+                "not": 15,
+                "noi": 4,
+                "analysis": "The code is under commented. ",
+                "dependencies": [
+                    "Core(2)",
+                    "Application(2)"
+                ],
+                "submodules": {
+                    "Application_Test": {
+                        "n_of_files": 2,
+                        "metric": {
+                            "loc": 221,
+                            "noc": 17,
+                            "n_a": 0,
+                            "n_c": 4,
+                            "nom": 21,
+                            "not": 15,
+                            "poc": 7.143
+                        },
+                        "submodules": [
+                            {
+                                "Application": {
+                                    "n_of_files": 2,
+                                    "metric": {
+                                        "loc": 221,
+                                        "noc": 17,
+                                        "n_a": 0,
+                                        "n_c": 4,
+                                        "nom": 21,
+                                        "not": 15,
+                                        "poc": 7.143
+                                    },
+                                    "submodules": [
+                                        {
+                                            "ApplicationTests": {
+                                                "n_of_files": 2,
+                                                "metric": {
+                                                    "loc": 221,
+                                                    "noc": 17,
+                                                    "n_a": 0,
+                                                    "n_c": 4,
+                                                    "nom": 21,
+                                                    "not": 15,
+                                                    "poc": 7.143
+                                                },
+                                                "submodules": []
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ],
+    "shared": {
+        "loc": 0,
+        "noc": 0,
+        "n_a": 0,
+        "n_c": 0,
+        "nom": 0,
+        "not": 0,
+        "poc": 0.0,
+        "noi": 0
+    },
+    "aggregate": {
+        "non-test-frameworks": {
+            "loc": 787,
+            "noc": 164,
+            "n_a": 5,
+            "n_c": 21,
+            "nom": 21,
+            "not": 0,
+            "poc": 17.245,
+            "noi": 14
+        },
+        "tests-frameworks": {
+            "loc": 221,
+            "noc": 17,
+            "n_a": 0,
+            "n_c": 4,
+            "nom": 21,
+            "not": 15,
+            "poc": 7.143,
+            "noi": 4
+        },
+        "total": {
+            "loc": 1008,
+            "noc": 181,
+            "n_a": 5,
+            "n_c": 25,
+            "nom": 42,
+            "not": 15,
+            "poc": 15.223,
+            "noi": 18
+        }
+    }
+}
