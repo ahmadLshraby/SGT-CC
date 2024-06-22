@@ -13,9 +13,9 @@ public protocol PopularMoviesUseCase {
 }
 
 public class PopularMoviesUseCaseImp: PopularMoviesUseCase {
-    private var repository: PopularMoviesRepository
+    private var repository: MoviesRepository
 
-    public init(repository: PopularMoviesRepository) {
+    public init(repository: MoviesRepository) {
         self.repository = repository
     }
     

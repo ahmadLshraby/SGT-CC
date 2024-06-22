@@ -27,6 +27,31 @@ public struct MovieDetailsResponse: Codable {
     public let voteAverage: Double?
     public let voteCount: Int?
 
+    public init(adult: Bool? = nil, backdropPath: String? = nil, budget: Int? = nil, genres: [Genre]? = nil, homepage: String? = nil, id: Int? = nil, imdbID: String? = nil, originalLanguage: String? = nil, originalTitle: String? = nil, overview: String? = nil, popularity: Double? = nil, posterPath: String? = nil, productionCompanies: [ProductionCompany]? = nil, releaseDate: String? = nil, revenue: Int? = nil, runtime: Int? = nil, status: String? = nil, tagline: String? = nil, title: String? = nil, video: Bool? = nil, voteAverage: Double? = nil, voteCount: Int? = nil) {
+        self.adult = adult
+        self.backdropPath = backdropPath
+        self.budget = budget
+        self.genres = genres
+        self.homepage = homepage
+        self.id = id
+        self.imdbID = imdbID
+        self.originalLanguage = originalLanguage
+        self.originalTitle = originalTitle
+        self.overview = overview
+        self.popularity = popularity
+        self.posterPath = posterPath
+        self.productionCompanies = productionCompanies
+        self.releaseDate = releaseDate
+        self.revenue = revenue
+        self.runtime = runtime
+        self.status = status
+        self.tagline = tagline
+        self.title = title
+        self.video = video
+        self.voteAverage = voteAverage
+        self.voteCount = voteCount
+    }
+    
     public enum CodingKeys: String, CodingKey {
         case adult
         case backdropPath = "backdrop_path"

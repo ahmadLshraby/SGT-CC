@@ -14,6 +14,14 @@ public struct MoviesResponse: Codable {
     public let results: [MoviesResult]?
     public let totalPages, totalResults: Int?
     
+    public init(dates: Dates? = nil, page: Int? = nil, results: [MoviesResult]? = nil, totalPages: Int? = nil, totalResults: Int? = nil) {
+        self.dates = dates
+        self.page = page
+        self.results = results
+        self.totalPages = totalPages
+        self.totalResults = totalResults
+    }
+    
     public enum CodingKeys: String, CodingKey {
         case dates, page, results
         case totalPages = "total_pages"

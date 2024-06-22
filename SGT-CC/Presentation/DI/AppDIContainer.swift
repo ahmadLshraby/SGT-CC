@@ -43,17 +43,14 @@ public final class AppDIContainer: ObservableObject {
     
     // MARK: - Use Cases
     public func makePopularMoviesUseCase() -> PopularMoviesUseCase {
-        return PopularMoviesUseCaseImp(repository: makePopularMoviesRepository())
+        return PopularMoviesUseCaseImp(repository: makeMoviesRepository())
     }
     public func makeMovieDetailsUseCase() -> MovieDetailsUseCase {
-        return MovieDetailsUseCaseImp(repository: makeMovieDetailsRepository())
+        return MovieDetailsUseCaseImp(repository: makeMoviesRepository())
     }
     
     // MARK: - Repositories
-    public func makePopularMoviesRepository() -> PopularMoviesRepository {
+    public func makeMoviesRepository() -> MoviesRepository {
         return DefaultPopularMovies(apiClient: APIClient())
-    }
-    public func makeMovieDetailsRepository() -> MovieDetailsRepository {
-        return DefaultMovieDetails(apiClient: APIClient())
     }
 }
