@@ -1,7 +1,3 @@
-# Sample
-
----
-
 # Table of Contents
 + [About](#about)
 + [Implementation](#implementation)
