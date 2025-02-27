@@ -16,11 +16,6 @@ on:
         required: true
         default: true
         type: boolean
-      run_blackduck:
-        description: "Run BlackDuck security scan"
-        required: true
-        default: false
-        type: boolean
       run_tests:
         description: "Run tests"
         required: true
@@ -28,6 +23,11 @@ on:
         type: boolean
       run_sonarqube:
         description: "Run SonarQube analysis"
+        required: true
+        default: false
+        type: boolean
+      run_blackduck:
+        description: "Run BlackDuck security scan"
         required: true
         default: false
         type: boolean
@@ -42,8 +42,7 @@ on:
         type: string
 
 env:
-  APP_CENTER_APP_NAME_IOS: ADAC-Dev/ADAC-AVM-Clubmobil
-  APP_CENTER_APP_NAME_ANDROID: ADAC-Dev/ADAC-AVM-Clubmobil-1
+  # APP_CENTER_APP_NAME_IOS: ADAC-Dev/ADAC-AVM-Clubmobil
   BUILD_NUMBER_BASE: 200
   CONFIGURATION: Release
   DOTNET_CLI_TELEMETRY_OPTOUT: true
@@ -51,12 +50,10 @@ env:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
   DOTNET_VERSION: 8.x
   OUTPUT_FOLDER: ${{ github.workspace }}/output
-  PROJECT_FOLDER_ANDROID: ADACCRRentalStationManagement.UI.Droid
-  PROJECT_FOLDER_IOS: ADACCRRentalStationManagement.UI.iOS
-  PROJECT_NAME_ANDROID: ADACCRRentalStationManagement_UI_Droid
-  PROJECT_NAME_IOS: ADACCRRentalStationManagement_UI_iOS
+  # PROJECT_FOLDER_IOS: ADACCRRentalStationManagement.UI.iOS
+  # PROJECT_NAME_IOS: ADACCRRentalStationManagement_UI_iOS
   RUN_NUMBER: ${{ github.run_number }}
-  SOLUTION_FILE: ADACCRRentalStationManagement.sln
+  # SOLUTION_FILE: ADACCRRentalStationManagement.sln
   XCODE_VERSION: 15.4
 
 jobs:
@@ -70,17 +67,15 @@ jobs:
         run: |
           echo "Environment: ${{ github.event.inputs.environment }}"
           echo "Run Build: ${{ github.event.inputs.run_build }}"
-          echo "Run BlackDuck: ${{ github.event.inputs.run_blackduck }}"
           echo "Run Tests: ${{ github.event.inputs.run_tests }}"
           echo "Run SonarQube: ${{ github.event.inputs.run_sonarqube }}"
+          echo "Run BlackDuck: ${{ github.event.inputs.run_blackduck }}"
           echo "Upload to Store: ${{ github.event.inputs.upload_to_store }}"
+          echo "What To Test Text: ${{ github.event.inputs.what_to_test_text }}"
 
       - name: Set What To Test Text
         run: |
           echo "WHAT_TO_TEST_TEXT=Environment: ${{ github.event.inputs.environment }}\nBranch: $(git rev-parse --abbrev-ref HEAD)\nSHA: $(git rev-parse --short HEAD)" >> $GITHUB_ENV
-
-      - name: Print What To Test Text
-        run: echo "$WHAT_TO_TEST_TEXT"
 
       - name: Setup dotnet
         uses: actions/setup-dotnet@v4
