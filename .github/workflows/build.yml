@@ -24,7 +24,7 @@ env:
 
 jobs:
   build_reusable:
-    uses: SGT-CC/.github/workflows/reusableBuild.yml@deployment-1.1
+    uses: SGT-CC/.github/workflows/reusableBuild.yml@main
     with:
       environment: "production"
       run_build: true
