@@ -4,17 +4,135 @@ on:
     branches:
       - main
 
+  workflow_dispatch:
+    inputs:
+      config:
+        description: Configuration
+        required: true
+        type: choice
+        options:
+          - Release
+      build_ios:
+        description: Build iOS App
+        type: boolean
+        default: true
+      deploy:
+        description: Deploy Apps to App Store
+        type: boolean
+        default: true
+
+env:
+  APP_CENTER_APP_NAME_IOS: ADAC-Dev/ADAC-AVM-Clubmobil
+  APP_CENTER_APP_NAME_ANDROID: ADAC-Dev/ADAC-AVM-Clubmobil-1
+  BUILD_NUMBER_BASE: 200
+  CONFIGURATION: ${{ inputs.config || 'Release' }}
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  DOTNET_NOLOGO: true
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  DOTNET_VERSION: 8.x
+  OUTPUT_FOLDER: ${{ github.workspace }}/output
+  PROJECT_FOLDER_ANDROID: ADACCRRentalStationManagement.UI.Droid
+  PROJECT_FOLDER_IOS: ADACCRRentalStationManagement.UI.iOS
+  PROJECT_NAME_ANDROID: ADACCRRentalStationManagement_UI_Droid
+  PROJECT_NAME_IOS: ADACCRRentalStationManagement_UI_iOS
+  RUN_NUMBER: ${{ github.run_number }}
+  SOLUTION_FILE: ADACCRRentalStationManagement.sln
+  XCODE_VERSION: 15.4
+
 jobs:
+  test:
+    runs-on: macos-14
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }} 
+      - name: Restore dotnet workloads
+        run: |
+          dotnet workload update
+          dotnet workload restore
+      - name: Restore dependencies
+        run: dotnet restore ${{ env.SOLUTION_FILE }}
+      - name: Test solution
+        run: >
+          dotnet test
+          -c "${{ env.CONFIGURATION }}"
+          --logger:"trx;LogFileName=TestResults.trx"
+          --results-directory ${{ env.OUTPUT_FOLDER }}
+          ${{ env.SOLUTION_FILE }}
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: ${{ env.OUTPUT_FOLDER }}/TestResults.trx
+          retention-days: 3
   build:
-    uses: SGT-CC/adac-build-pipeline-ios/.github/workflows/build.yml@deployment-1.1
-    with:
-      environment: "production"
-      run_build: true
-      run_blackduck: false
-      run_tests: false
-      run_sonarqube: false
-      upload_to_store: false
-    secrets: inherit
+    runs-on: macos-14
+    needs: [test]
+    if: ${{ inputs.build_ios == true || github.event_name == 'push' && github.ref_name == 'master' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+      - name: Restore dotnet workloads
+        run: |
+          dotnet workload update
+          dotnet workload restore
+      - name: Restore dependencies
+        run: dotnet restore ${{ env.SOLUTION_FILE }}
+      - name: Select xcode version
+        run: sudo xcode-select -switch /Applications/Xcode_${{ env.XCODE_VERSION }}.app
+      - name: Increase version number
+        run: |
+          for PLIST_FILE in $(find . -name "Info*.plist" -type f -not -path '*/bin/*' -not -path '*/obj/*')
+          do
+            echo "Updating build number in ${PLIST_FILE}"
+            plutil -replace CFBundleVersion -string $((${{ env.BUILD_NUMBER_BASE }} + ${{ env.RUN_NUMBER }})) "${PLIST_FILE}"
+          done
+      - name: Prepare code signing certificate
+        uses: ADAC-Mobile/adac-prepare-signing-ios@v2
+        with:
+          codesigning_keychain_password: ${{ secrets.IOS_KEYCHAIN_PASSWORD }}
+          codesigning_identity_cert_p12_base64: ${{ secrets.IOS_CODESIGNING_IDENTITY_CERT_P12_BASE64 }}
+          codesigning_identity_cert_p12_password: ${{ secrets.IOS_CODESIGNING_IDENTITY_CERT_P12_PASSWORD }}
+      - name: Prepare provisioning profile for app
+        uses: ADAC-Mobile/adac-prepare-signing-ios@v2
+        with:
+          codesigning_provisioning_profile_base64: ${{ vars.IOS_CODESIGNING_PROVISIONING_PROFILE_BASE64 }}
+      - name: Prepare provisioning profile for app notification service extension
+        uses: ADAC-Mobile/adac-prepare-signing-ios@v2
+        with:
+          codesigning_provisioning_profile_base64: ${{ vars.IOS_CODESIGNING_PROVISIONING_PROFILE_NOTIFICATION_BASE64 }}
+      - name: Build app
+        env:
+          IOS_CODESIGNING_IDENTITY_NAME: ${{ vars.IOS_CODESIGNING_IDENTITY_NAME }}
+          IOS_CODESIGNING_PROVISIONING_PROFILE_NAME: ${{ vars.IOS_CODESIGNING_PROVISIONING_PROFILE_NAME }}
+          IOS_CODESIGNING_PROVISIONING_PROFILE_NOTIFICATION_NAME: ${{ vars.IOS_CODESIGNING_PROVISIONING_PROFILE_NOTIFICATION_NAME }}
+        run: >
+          dotnet build
+          -c "${{ env.CONFIGURATION }}"
+          -t:"${{ env.PROJECT_NAME_IOS }}"
+          -p:Platform="iPhone"
+          -p:RuntimeIdentifier="ios-arm64"
+          -p:BuildIpa=true
+          ${{ env.SOLUTION_FILE }}
+      - name: Upload app artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios
+          path: ${{ env.PROJECT_FOLDER_IOS }}/bin/iPhone/${{ env.CONFIGURATION }}/net*-ios/ios-arm64/*.ipa
+          retention-days: 3
+      - name: Upload app symbols
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-dsym
+          path: ${{ env.PROJECT_FOLDER_IOS }}/bin/iPhone/${{ env.CONFIGURATION }}/net*-ios/ios-arm64/*.dSYM
+          retention-days: 3
 # name: SGT Build Pipeline
 # on:
 #   push:
