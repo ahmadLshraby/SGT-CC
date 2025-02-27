@@ -81,8 +81,8 @@ jobs:
       #     dotnet workload update
       #     dotnet workload restore
 
-      - name: Restore dependencies
-        run: dotnet restore ${{ env.SOLUTION_FILE }}
+      # - name: Restore dependencies
+      #   run: dotnet restore ${{ env.SOLUTION_FILE }}
 
       - name: Select Xcode version
         run: sudo xcode-select -switch /Applications/Xcode_${{ env.XCODE_VERSION }}.app
