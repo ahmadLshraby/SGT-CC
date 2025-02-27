@@ -18,7 +18,7 @@ jobs:
         xcode-version: '16.1'
 
     - name: Set up project
-      uses: SGT-CC/.github/workflows/build.yml@deployment-1.1
+      uses: SGT-CC/adac-build-pipeline-ios/.github/workflows/build.yml@deployment-1.1
       # secrets: inherit
       with:
         environment: "production"
