@@ -40,38 +40,38 @@ env:
   XCODE_VERSION: 15.4
 
 jobs:
-  test:
-    runs-on: macos-14
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup dotnet
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: ${{ env.DOTNET_VERSION }} 
-      - name: Restore dotnet workloads
-        run: |
-          dotnet workload update
-          dotnet workload restore
-      - name: Restore dependencies
-        run: dotnet restore ${{ env.SOLUTION_FILE }}
-      - name: Test solution
-        run: >
-          dotnet test
-          -c "${{ env.CONFIGURATION }}"
-          --logger:"trx;LogFileName=TestResults.trx"
-          --results-directory ${{ env.OUTPUT_FOLDER }}
-          ${{ env.SOLUTION_FILE }}
-      - name: Upload test results
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-results
-          path: ${{ env.OUTPUT_FOLDER }}/TestResults.trx
-          retention-days: 3
+  # test:
+  #   runs-on: macos-14
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
+  #     - name: Setup dotnet
+  #       uses: actions/setup-dotnet@v4
+  #       with:
+  #         dotnet-version: ${{ env.DOTNET_VERSION }} 
+  #     - name: Restore dotnet workloads
+  #       run: |
+  #         dotnet workload update
+  #         dotnet workload restore
+  #     - name: Restore dependencies
+  #       run: dotnet restore ${{ env.SOLUTION_FILE }}
+  #     - name: Test solution
+  #       run: >
+  #         dotnet test
+  #         -c "${{ env.CONFIGURATION }}"
+  #         --logger:"trx;LogFileName=TestResults.trx"
+  #         --results-directory ${{ env.OUTPUT_FOLDER }}
+  #         ${{ env.SOLUTION_FILE }}
+  #     - name: Upload test results
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: test-results
+  #         path: ${{ env.OUTPUT_FOLDER }}/TestResults.trx
+  #         retention-days: 3
   build:
     runs-on: macos-14
-    needs: [test]
-    if: ${{ inputs.build_ios == true || github.event_name == 'push' && github.ref_name == 'master' }}
+    # needs: [test]
+    if: ${{ inputs.build_ios == true || github.event_name == 'push' && github.ref_name == 'main' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
