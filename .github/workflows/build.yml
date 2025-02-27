@@ -76,10 +76,10 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      - name: Restore dotnet workloads
-        run: |
-          dotnet workload update
-          dotnet workload restore
+      # - name: Restore dotnet workloads
+      #   run: |
+      #     dotnet workload update
+      #     dotnet workload restore
 
       - name: Restore dependencies
         run: dotnet restore ${{ env.SOLUTION_FILE }}
