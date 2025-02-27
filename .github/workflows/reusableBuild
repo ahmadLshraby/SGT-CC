@@ -1,0 +1,34 @@
+name: Reusable iOS Build Pipeline
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+      run_build:
+        required: true
+        type: boolean
+      run_blackduck:
+        required: true
+        type: boolean
+      run_tests:
+        required: true
+        type: boolean
+      run_sonarqube:
+        required: true
+        type: boolean
+      upload_to_store:
+        required: true
+        type: boolean
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Print inputs
+        run: |
+          echo "Environment: ${{ inputs.environment }}"
+          echo "Run Build: ${{ inputs.run_build }}"
