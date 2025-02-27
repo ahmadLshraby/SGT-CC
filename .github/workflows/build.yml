@@ -15,7 +15,7 @@ jobs:
     - name: Set up Xcode
       uses: maxim-lobanov/setup-xcode@v1
       with:
-        xcode-version: '16.0'
+        xcode-version: '16.1'
 # jobs:
 #   run-adac-build-pipeline:
 #     uses: ADAC-Mobile/adac-build-pipeline-ios/.github/workflows/action.yml@deployment-1.1
