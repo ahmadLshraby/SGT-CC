@@ -24,7 +24,7 @@ on:
       run_tests:
         description: "Run tests"
         required: true
-        default: true
+        default: false
         type: boolean
       run_sonarqube:
         description: "Run SonarQube analysis"
@@ -36,6 +36,10 @@ on:
         required: true
         default: false
         type: boolean
+      what_to_test_text:
+        description: "TestFlight information"
+        required: false
+        type: string
 
 env:
   APP_CENTER_APP_NAME_IOS: ADAC-Dev/ADAC-AVM-Clubmobil
@@ -70,6 +74,13 @@ jobs:
           echo "Run Tests: ${{ github.event.inputs.run_tests }}"
           echo "Run SonarQube: ${{ github.event.inputs.run_sonarqube }}"
           echo "Upload to Store: ${{ github.event.inputs.upload_to_store }}"
+
+      - name: Set What To Test Text
+        run: |
+          echo "WHAT_TO_TEST_TEXT=Environment: ${{ github.event.inputs.environment }}\nBranch: $(git rev-parse --abbrev-ref HEAD)\nSHA: $(git rev-parse --short HEAD)" >> $GITHUB_ENV
+
+      - name: Print What To Test Text
+        run: echo "$WHAT_TO_TEST_TEXT"
 
       - name: Setup dotnet
         uses: actions/setup-dotnet@v4
