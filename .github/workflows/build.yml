@@ -107,22 +107,22 @@ jobs:
         if: github.event.inputs.run_sonarqube == 'true'
         run: echo "Running SonarQube analysis..."
 
-      - name: Prepare code signing certificate
-        uses: SGT-CC/sgt-prepare-signing-ios@v2
-        with:
-          codesigning_keychain_password: ${{ secrets.IOS_KEYCHAIN_PASSWORD }}
-          codesigning_identity_cert_p12_base64: ${{ secrets.IOS_CODESIGNING_IDENTITY_CERT_P12_BASE64 }}
-          codesigning_identity_cert_p12_password: ${{ secrets.IOS_CODESIGNING_IDENTITY_CERT_P12_PASSWORD }}
+      # - name: Prepare code signing certificate
+      #   uses: SGT-CC/sgt-prepare-signing-ios@v2
+      #   with:
+      #     codesigning_keychain_password: ${{ secrets.IOS_KEYCHAIN_PASSWORD }}
+      #     codesigning_identity_cert_p12_base64: ${{ secrets.IOS_CODESIGNING_IDENTITY_CERT_P12_BASE64 }}
+      #     codesigning_identity_cert_p12_password: ${{ secrets.IOS_CODESIGNING_IDENTITY_CERT_P12_PASSWORD }}
 
-      - name: Prepare provisioning profile for app
-        uses: SGT-CC/sgt-prepare-signing-ios@v2
-        with:
-          codesigning_provisioning_profile_base64: ${{ vars.IOS_CODESIGNING_PROVISIONING_PROFILE_BASE64 }}
+      # - name: Prepare provisioning profile for app
+      #   uses: SGT-CC/sgt-prepare-signing-ios@v2
+      #   with:
+      #     codesigning_provisioning_profile_base64: ${{ vars.IOS_CODESIGNING_PROVISIONING_PROFILE_BASE64 }}
 
-      - name: Prepare provisioning profile for app notification service extension
-        uses: SGT-CC/sgt-prepare-signing-ios@v2
-        with:
-          codesigning_provisioning_profile_base64: ${{ vars.IOS_CODESIGNING_PROVISIONING_PROFILE_NOTIFICATION_BASE64 }}
+      # - name: Prepare provisioning profile for app notification service extension
+      #   uses: SGT-CC/sgt-prepare-signing-ios@v2
+      #   with:
+      #     codesigning_provisioning_profile_base64: ${{ vars.IOS_CODESIGNING_PROVISIONING_PROFILE_NOTIFICATION_BASE64 }}
 
       - name: Build app
         if: github.event.inputs.run_build == 'true'
