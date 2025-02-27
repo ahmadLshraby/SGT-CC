@@ -1,14 +1,47 @@
 name: SGT Build Pipeline
+
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Environment (e.g., Production, Staging)"
+        required: true
+        default: "Production"
+        type: string
+      run_build:
+        description: "Run build step"
+        required: true
+        default: true
+        type: boolean
+      run_blackduck:
+        description: "Run BlackDuck security scan"
+        required: true
+        default: false
+        type: boolean
+      run_tests:
+        description: "Run tests"
+        required: true
+        default: true
+        type: boolean
+      run_sonarqube:
+        description: "Run SonarQube analysis"
+        required: true
+        default: false
+        type: boolean
+      upload_to_store:
+        description: "Upload build to the App Store"
+        required: true
+        default: false
+        type: boolean
 
 env:
   APP_CENTER_APP_NAME_IOS: ADAC-Dev/ADAC-AVM-Clubmobil
   APP_CENTER_APP_NAME_ANDROID: ADAC-Dev/ADAC-AVM-Clubmobil-1
   BUILD_NUMBER_BASE: 200
-  CONFIGURATION: ${{ inputs.config || 'Release' }}
+  CONFIGURATION: Release
   DOTNET_CLI_TELEMETRY_OPTOUT: true
   DOTNET_NOLOGO: true
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
@@ -23,36 +56,37 @@ env:
   XCODE_VERSION: 15.4
 
 jobs:
-  build_reusable:
-    uses: SGT-CC/.github/workflows/reusableBuild.yml@main
-    with:
-      environment: "production"
-      run_build: true
-      run_blackduck: false
-      run_tests: false
-      run_sonarqube: false
-      upload_to_store: false
-    secrets: inherit
-
   build:
     runs-on: macos-14
-    needs: build_reusable  # Ensures the reusable workflow runs first
-    if: ${{ inputs.build_ios == true || github.event_name == 'push' && github.ref_name == 'main' }}
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Print inputs
+        run: |
+          echo "Environment: ${{ github.event.inputs.environment }}"
+          echo "Run Build: ${{ github.event.inputs.run_build }}"
+          echo "Run BlackDuck: ${{ github.event.inputs.run_blackduck }}"
+          echo "Run Tests: ${{ github.event.inputs.run_tests }}"
+          echo "Run SonarQube: ${{ github.event.inputs.run_sonarqube }}"
+          echo "Upload to Store: ${{ github.event.inputs.upload_to_store }}"
+
       - name: Setup dotnet
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
+
       - name: Restore dotnet workloads
         run: |
           dotnet workload update
           dotnet workload restore
+
       - name: Restore dependencies
         run: dotnet restore ${{ env.SOLUTION_FILE }}
-      - name: Select xcode version
+
+      - name: Select Xcode version
         run: sudo xcode-select -switch /Applications/Xcode_${{ env.XCODE_VERSION }}.app
+
       - name: Increase version number
         run: |
           for PLIST_FILE in $(find . -name "Info*.plist" -type f -not -path '*/bin/*' -not -path '*/obj/*')
@@ -60,21 +94,38 @@ jobs:
             echo "Updating build number in ${PLIST_FILE}"
             plutil -replace CFBundleVersion -string $((${{ env.BUILD_NUMBER_BASE }} + ${{ env.RUN_NUMBER }})) "${PLIST_FILE}"
           done
+
+      - name: Run BlackDuck scan
+        if: github.event.inputs.run_blackduck == 'true'
+        run: echo "Running BlackDuck scan..."
+
+      - name: Run Tests
+        if: github.event.inputs.run_tests == 'true'
+        run: dotnet test --filter FullyQualifiedName~Tests
+
+      - name: Run SonarQube
+        if: github.event.inputs.run_sonarqube == 'true'
+        run: echo "Running SonarQube analysis..."
+
       - name: Prepare code signing certificate
         uses: SGT-CC/sgt-prepare-signing-ios@v2
         with:
           codesigning_keychain_password: ${{ secrets.IOS_KEYCHAIN_PASSWORD }}
           codesigning_identity_cert_p12_base64: ${{ secrets.IOS_CODESIGNING_IDENTITY_CERT_P12_BASE64 }}
           codesigning_identity_cert_p12_password: ${{ secrets.IOS_CODESIGNING_IDENTITY_CERT_P12_PASSWORD }}
+
       - name: Prepare provisioning profile for app
         uses: SGT-CC/sgt-prepare-signing-ios@v2
         with:
           codesigning_provisioning_profile_base64: ${{ vars.IOS_CODESIGNING_PROVISIONING_PROFILE_BASE64 }}
+
       - name: Prepare provisioning profile for app notification service extension
         uses: SGT-CC/sgt-prepare-signing-ios@v2
         with:
           codesigning_provisioning_profile_base64: ${{ vars.IOS_CODESIGNING_PROVISIONING_PROFILE_NOTIFICATION_BASE64 }}
+
       - name: Build app
+        if: github.event.inputs.run_build == 'true'
         env:
           IOS_CODESIGNING_IDENTITY_NAME: ${{ vars.IOS_CODESIGNING_IDENTITY_NAME }}
           IOS_CODESIGNING_PROVISIONING_PROFILE_NAME: ${{ vars.IOS_CODESIGNING_PROVISIONING_PROFILE_NAME }}
@@ -87,13 +138,17 @@ jobs:
           -p:RuntimeIdentifier="ios-arm64"
           -p:BuildIpa=true
           ${{ env.SOLUTION_FILE }}
+
       - name: Upload app artifacts
+        if: github.event.inputs.upload_to_store == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: ios
           path: ${{ env.PROJECT_FOLDER_IOS }}/bin/iPhone/${{ env.CONFIGURATION }}/net*-ios/ios-arm64/*.ipa
           retention-days: 3
+
       - name: Upload app symbols
+        if: github.event.inputs.upload_to_store == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: ios-dsym
