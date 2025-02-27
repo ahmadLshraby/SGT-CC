@@ -16,14 +16,17 @@ jobs:
       uses: maxim-lobanov/setup-xcode@v1
       with:
         xcode-version: '16.1'
+
+    - name: Set up project
+      uses: SGT-CC/.github/workflows/build.yml@deployment-1.1
+      # secrets: inherit
+      with:
+        environment: "production"
+        run_build: true
+        run_blackduck: false
+        run_tests: false
+        run_sonarqube: false
+        upload_to_store: false
+
 # jobs:
 #   run-adac-build-pipeline:
-#     uses: ADAC-Mobile/adac-build-pipeline-ios/.github/workflows/action.yml@deployment-1.1
-#     secrets: inherit
-#     with:
-#       environment: "production"
-#       run_build: true
-#       run_blackduck: false
-#       run_tests: false
-#       run_sonarqube: false
-#       upload_to_store: false
