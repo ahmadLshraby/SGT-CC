@@ -82,8 +82,7 @@ jobs:
                   "fields": [
                     { "title": "Branch", "value": "${{ github.ref }}", "short": true },
                     { "title": "Commit SHA", "value": "${{ github.sha }}", "short": true },
-                    { "title": "Triggered by", "value": "${{ github.actor }}", "short": true },
-                    { "title": "Commit Message", "value": "${{ env.COMMIT_MESSAGES }}", "short": false }
+                    { "title": "Triggered by", "value": "${{ github.actor }}", "short": true }
                   ]
                 }
               ]
