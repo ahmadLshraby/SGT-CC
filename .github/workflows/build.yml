@@ -129,8 +129,6 @@ jobs:
         with:
           token: ${{ secrets.Slack_Notification_Token }}
           repository: ahmadLshraby/SGT-CC
-          event-type: build-completed
-          client-payload: '{ "status": "${{ job.status }}", "branch": "${{ github.ref_name }}", "repo": "${{ github.repository }}", "actor": "${{ github.actor }}" }'
           slack-message: "A new push was made to the main branch!"
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
