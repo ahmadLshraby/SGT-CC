@@ -124,7 +124,7 @@ jobs:
         if: always()
         uses: peter-evans/repository-dispatch@v3
         with:
-          token: ${{ secrets.SLACK_WEBHOOK_URL }}
+          token: ${{ secrets.Slack_Notification_Token }}
           repository: ahmadLshraby/SGT-CC
           event-type: build-completed
           client-payload: '{ "status": "${{ job.status }}", "branch": "${{ github.ref_name }}", "repo": "${{ github.repository }}", "actor": "${{ github.actor }}" }'
