@@ -63,6 +63,27 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # 🚀 Notify Slack - Build Started
+      - name: Notify Slack - Build Started
+        uses: slackapi/slack-github-action@v1.24.0
+        with:
+          payload: >
+            {
+              "text": "🚀 Build started for *${{ github.repository }}*",
+              "attachments": [
+                {
+                  "color": "#3498db",
+                  "fields": [
+                    { "title": "Branch", "value": "${{ github.ref }}", "short": true },
+                    { "title": "Commit SHA", "value": "${{ github.sha }}", "short": true },
+                    { "title": "Triggered by", "value": "${{ github.actor }}", "short": true }
+                  ]
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
       - name: Print inputs
         run: |
           echo "Environment: ${{ github.event.inputs.environment }}"
@@ -120,45 +141,6 @@ jobs:
           -p:BuildIpa=true
           ${{ env.SOLUTION_FILE }}
 
-      - name: Debug Slack Webhook
-        run: echo "SLACK_WEBHOOK_URL='${{ secrets.SLACK_WEBHOOK_URL }}'"
-  
-      # 🚀 Slack Notification Step
-      - name: Send Slack Notification
-        uses: slackapi/slack-github-action@v1.24.0
-        with:
-          payload: >
-            { 
-              "text": "A new push was made to the repository!", 
-              "attachments": [
-                { 
-                  "color": "#36a64f", 
-                  "title": "Repository: ${{ github.repository }}", 
-                  "title_link": "https://github.com/${{ github.repository }}", 
-                  "fields": [
-                    { "title": "Branch", "value": "${{ github.ref }}", "short": true },
-                    { "title": "Commit Author", "value": "${{ github.actor }}", "short": true },
-                    { "title": "Commit Message", "value": "${{ github.event.head_commit.message }}", "short": false },
-                    { "title": "Commit SHA", "value": "${{ github.sha }}", "short": true },
-                    { "title": "Commit URL", "value": "https://github.com/${{ github.repository }}/commit/${{ github.sha }}", "short": false }
-                  ],
-                  "footer": "GitHub Actions", 
-                  "footer_icon": "https://github.githubassets.com/favicon.ico"
-                }
-              ]
-            }
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-
-      - name: Trigger Slack Notification Workflow
-        if: always()
-        uses: peter-evans/repository-dispatch@v3
-        with:
-          token: ${{ secrets.Slack_Notification_Token }}
-          repository: ahmadLshraby/SGT-CC
-          event-type: build-completed
-          client-payload: '{ "status": "${{ job.status }}", "branch": "${{ github.ref_name }}", "repo": "${{ github.repository }}", "actor": "${{ github.actor }}" }'
-
       - name: Upload app artifacts
         if: github.event.inputs.upload_to_store == 'true'
         uses: actions/upload-artifact@v4
@@ -174,3 +156,46 @@ jobs:
           name: ios-dsym
           path: ${{ env.PROJECT_FOLDER_IOS }}/bin/iPhone/${{ env.CONFIGURATION }}/net*-ios/ios-arm64/*.dSYM
           retention-days: 3
+
+      # 🟢 Notify Slack - Build Success
+      - name: Notify Slack - Build Success
+        if: success()
+        uses: slackapi/slack-github-action@v1.24.0
+        with:
+          payload: >
+            {
+              "text": "✅ Build Succeeded for *${{ github.repository }}*",
+              "attachments": [
+                {
+                  "color": "#2ecc71",
+                  "fields": [
+                    { "title": "Branch", "value": "${{ github.ref }}", "short": true },
+                    { "title": "Commit SHA", "value": "${{ github.sha }}", "short": true }
+                  ]
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      # 🔴 Notify Slack - Build Failed
+      - name: Notify Slack - Build Failed
+        if: failure()
+        uses: slackapi/slack-github-action@v1.24.0
+        with:
+          payload: >
+            {
+              "text": "❌ Build Failed for *${{ github.repository }}*",
+              "attachments": [
+                {
+                  "color": "#e74c3c",
+                  "fields": [
+                    { "title": "Branch", "value": "${{ github.ref }}", "short": true },
+                    { "title": "Commit SHA", "value": "${{ github.sha }}", "short": true },
+                    { "title": "Triggered by", "value": "${{ github.actor }}", "short": true }
+                  ]
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
