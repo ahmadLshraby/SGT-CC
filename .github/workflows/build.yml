@@ -127,7 +127,7 @@ jobs:
       - name: Send Slack Notification
         uses: slackapi/slack-github-action@v1.24.0
         with:
-          payload: |
+          payload: > # Use ">" for multi-line JSON
             {
               "text": "A new push was made to the repository!",
               "attachments": [
