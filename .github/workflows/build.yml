@@ -127,43 +127,13 @@ jobs:
       - name: Send Slack Notification
         uses: slackapi/slack-github-action@v1.24.0
         with:
-          payload: > # Use ">" for multi-line JSON
+          payload: |
             {
-              "text": "A new push was made to the repository!",
+              "text": "A new push was made to the ${{ github.ref }} branch by ${{ github.actor }}.",
               "attachments": [
                 {
-                  "color": "#36a64f",
-                  "title": "Repository: ${{ github.repository }}",
-                  "title_link": "https://github.com/${{ github.repository }}",
-                  "fields": [
-                    {
-                      "title": "Branch",
-                      "value": "${{ github.ref }}",
-                      "short": true
-                    },
-                    {
-                      "title": "Commit Author",
-                      "value": "${{ github.actor }}",
-                      "short": true
-                    },
-                    {
-                      "title": "Commit Message",
-                      "value": "${{ github.event.head_commit.message }}",
-                      "short": false
-                    },
-                    {
-                      "title": "Commit SHA",
-                      "value": "${{ github.sha }}",
-                      "short": true
-                    },
-                    {
-                      "title": "Commit URL",
-                      "value": "https://github.com/${{ github.repository }}/commit/${{ github.sha }}",
-                      "short": false
-                    }
-                  ],
-                  "footer": "GitHub Actions",
-                  "footer_icon": "https://github.githubassets.com/favicon.ico"
+                  "fallback": "Commit details",
+                  "text": "Commit message: ${{ github.event.head_commit.message }}"
                 }
               ]
             }
