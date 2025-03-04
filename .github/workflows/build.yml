@@ -127,11 +127,11 @@ jobs:
       - name: Send Slack Notification
         uses: slackapi/slack-github-action@v1.24.0
         with:
-          token: ${{ secrets.Slack_Notification_Token }}
           repository: ahmadLshraby/SGT-CC
           slack-message: "A new push was made to the main branch!"
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_BOT_TOKEN: ${{ secrets.Slack_Notification_Token }}
 
       # - name: Send Slack Notification
       #   uses: rtCamp/action-slack-notify@v2.2.1
