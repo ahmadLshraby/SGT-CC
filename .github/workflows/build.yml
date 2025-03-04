@@ -120,6 +120,15 @@ jobs:
           -p:BuildIpa=true
           ${{ env.SOLUTION_FILE }}
 
+      # 🚀 Slack Notification Step
+      - name: Send Slack Notification
+        if: always()  # This ensures it runs even if the build fails
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_MESSAGE: "🚀 Build *${{ github.run_number }}* for *${{ github.repository }}* completed with status: *${{ job.status }}*"
+          SLACK_COLOR: ${{ job.status == 'success' && 'good' || 'danger' }}
+
       - name: Trigger Slack Notification Workflow
         if: always()
         uses: peter-evans/repository-dispatch@v3
