@@ -75,7 +75,7 @@ jobs:
         with:
           payload: >
             {
-              "text": "🚀 Build started for *${{ github.repository }}*",
+              "text": "🚀 Build started for *${{ github.repository }}* Triggered by *${{ github.actor }}*"",
               "attachments": [
                 {
                   "color": "#3498db",
@@ -181,7 +181,7 @@ jobs:
         with:
           payload: >
             {
-              "text": "✅ Build Succeeded for *${{ github.repository }}*",
+              "text": "✅ Build Succeeded for *${{ github.repository }}*, Version *${{ github.BUILD_NUMBER }}*, Execution Time *${{ github.EXECUTION_TIME }}*",
               "attachments": [
                 {
                   "color": "#2ecc71",
@@ -204,7 +204,7 @@ jobs:
         with:
           payload: >
             {
-              "text": "❌ Build Failed for *${{ github.repository }}*",
+              "text": "❌ Build Failed for *${{ github.repository }}*, Execution Time *${{ github.EXECUTION_TIME }}*",
               "attachments": [
                 {
                   "color": "#e74c3c",
