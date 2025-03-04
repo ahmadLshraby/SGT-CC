@@ -124,8 +124,14 @@ jobs:
         run: echo "SLACK_WEBHOOK_URL='${{ secrets.SLACK_WEBHOOK_URL }}'"
   
       # 🚀 Slack Notification Step
+      - name: Send Slack Notification (Manual)
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+          --data '{"text":"🚀 Build *${{ github.run_number }}* completed with status: *${{ job.status }}*"}' \
+          "https://hooks.slack.com/services/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"
+    
       - name: Send Slack Notification
-        uses: rtCamp/action-slack-notify@v2
+        uses: rtCamp/action-slack-notify@v2.2.1
         env:
           SLACK_WEBHOOK_URL: "https://hooks.slack.com/services/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"
           SLACK_MESSAGE: "🚀 Build *${{ github.run_number }}* completed with status: *${{ job.status }}*"
