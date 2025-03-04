@@ -127,7 +127,7 @@ jobs:
       - name: Send Slack Notification
         uses: rtCamp/action-slack-notify@v2
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_URL: "https://hooks.slack.com/services/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"
           SLACK_MESSAGE: "🚀 Build *${{ github.run_number }}* completed with status: *${{ job.status }}*"
           SLACK_COLOR: ${{ job.status == 'success' && 'good' || 'danger' }}
 
