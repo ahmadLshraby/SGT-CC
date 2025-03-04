@@ -127,12 +127,18 @@ jobs:
       - name: Send Slack Notification
         uses: slackapi/slack-github-action@v1.24.0
         with:
-          repository: ahmadLshraby/SGT-CC
-          slack-message: "A new push was made to the main branch!"
-          channel-id: "C08FLN0U7EK" # Replace with your Slack channel ID
+          payload: |
+            {
+              "text": "A new push was made to the ${{ github.ref }} branch by ${{ github.actor }}.",
+              "attachments": [
+                {
+                  "fallback": "Commit details",
+                  "text": "Commit message: ${{ github.event.head_commit.message }}"
+                }
+              ]
+            }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_BOT_TOKEN: ${{ secrets.Slack_Notification_Token }}
 
       # - name: Send Slack Notification
       #   uses: rtCamp/action-slack-notify@v2.2.1
