@@ -163,8 +163,7 @@ jobs:
                     }
                   ],
                   "footer": "GitHub Actions",
-                  "footer_icon": "https://github.githubassets.com/favicon.ico",
-                  "ts": ${{ github.event.head_commit.timestamp }}
+                  "footer_icon": "https://github.githubassets.com/favicon.ico"
                 }
               ]
             }
