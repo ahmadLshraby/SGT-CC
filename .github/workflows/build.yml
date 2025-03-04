@@ -41,8 +41,11 @@ on:
         required: false
         type: string
 
+permissions:
+  contents: write
+  actions: write
+
 env:
-  # APP_CENTER_APP_NAME_IOS: ADAC-Dev/ADAC-AVM-Clubmobil
   BUILD_NUMBER_BASE: 200
   CONFIGURATION: Release
   DOTNET_CLI_TELEMETRY_OPTOUT: true
@@ -50,10 +53,7 @@ env:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
   DOTNET_VERSION: 8.x
   OUTPUT_FOLDER: ${{ github.workspace }}/output
-  # PROJECT_FOLDER_IOS: ADACCRRentalStationManagement.UI.iOS
-  # PROJECT_NAME_IOS: ADACCRRentalStationManagement_UI_iOS
   RUN_NUMBER: ${{ github.run_number }}
-  # SOLUTION_FILE: ADACCRRentalStationManagement.sln
   XCODE_VERSION: 15.4
 
 jobs:
@@ -82,14 +82,6 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      # - name: Restore dotnet workloads
-      #   run: |
-      #     dotnet workload update
-      #     dotnet workload restore
-
-      # - name: Restore dependencies
-      #   run: dotnet restore ${{ env.SOLUTION_FILE }}
-
       - name: Select Xcode version
         run: sudo xcode-select -switch /Applications/Xcode_${{ env.XCODE_VERSION }}.app
 
@@ -113,23 +105,6 @@ jobs:
         if: github.event.inputs.run_sonarqube == 'true'
         run: echo "Running SonarQube analysis..."
 
-      # - name: Prepare code signing certificate
-      #   uses: SGT-CC/sgt-prepare-signing-ios@v2
-      #   with:
-      #     codesigning_keychain_password: ${{ secrets.IOS_KEYCHAIN_PASSWORD }}
-      #     codesigning_identity_cert_p12_base64: ${{ secrets.IOS_CODESIGNING_IDENTITY_CERT_P12_BASE64 }}
-      #     codesigning_identity_cert_p12_password: ${{ secrets.IOS_CODESIGNING_IDENTITY_CERT_P12_PASSWORD }}
-
-      # - name: Prepare provisioning profile for app
-      #   uses: SGT-CC/sgt-prepare-signing-ios@v2
-      #   with:
-      #     codesigning_provisioning_profile_base64: ${{ vars.IOS_CODESIGNING_PROVISIONING_PROFILE_BASE64 }}
-
-      # - name: Prepare provisioning profile for app notification service extension
-      #   uses: SGT-CC/sgt-prepare-signing-ios@v2
-      #   with:
-      #     codesigning_provisioning_profile_base64: ${{ vars.IOS_CODESIGNING_PROVISIONING_PROFILE_NOTIFICATION_BASE64 }}
-
       - name: Build app
         if: github.event.inputs.run_build == 'true'
         env:
@@ -149,6 +124,8 @@ jobs:
         if: always()
         uses: peter-evans/repository-dispatch@v3
         with:
+          token: ${{ secrets.PAT_TOKEN }}
+          repository: ahmadLshraby/SGT-CC
           event-type: build-completed
           client-payload: '{ "status": "${{ job.status }}", "branch": "${{ github.ref_name }}", "repo": "${{ github.repository }}", "actor": "${{ github.actor }}" }'
 
