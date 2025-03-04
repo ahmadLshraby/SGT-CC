@@ -137,6 +137,9 @@ jobs:
         uses: peter-evans/repository-dispatch@v3
         with:
           token: ${{ secrets.Slack_Notification_Token }}
+          repository: ahmadLshraby/SGT-CC
+          event-type: build-completed
+          client-payload: '{ "status": "${{ job.status }}", "branch": "${{ github.ref_name }}", "repo": "${{ github.repository }}", "actor": "${{ github.actor }}" }'
 
       - name: Upload app artifacts
         if: github.event.inputs.upload_to_store == 'true'
