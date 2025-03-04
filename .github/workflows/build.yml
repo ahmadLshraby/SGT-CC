@@ -120,9 +120,12 @@ jobs:
           -p:BuildIpa=true
           ${{ env.SOLUTION_FILE }}
 
+      - name: Debug Slack Webhook
+        run: echo "SLACK_WEBHOOK_URL is set to '${{ secrets.SLACK_WEBHOOK_URL }}'"
+  
       # 🚀 Slack Notification Step
       - name: Send Slack Notification
-        if: always()  # This ensures it runs even if the build fails
+        if: always()
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
@@ -134,9 +137,6 @@ jobs:
         uses: peter-evans/repository-dispatch@v3
         with:
           token: ${{ secrets.Slack_Notification_Token }}
-          repository: ahmadLshraby/SGT-CC
-          event-type: build-completed
-          client-payload: '{ "status": "${{ job.status }}", "branch": "${{ github.ref_name }}", "repo": "${{ github.repository }}", "actor": "${{ github.actor }}" }'
 
       - name: Upload app artifacts
         if: github.event.inputs.upload_to_store == 'true'
