@@ -121,12 +121,12 @@ jobs:
           ${{ env.SOLUTION_FILE }}
 
       - name: Debug Slack Webhook
-        run: echo "SLACK_WEBHOOK_URL is set to '${{ secrets.SLACK_WEBHOOK_URL }}'"
+        run: echo "SLACK_WEBHOOK_URL='${{ secrets.SLACK_WEBHOOK_URL }}'"
   
       # 🚀 Slack Notification Step
       - name: Send Slack Notification
         if: always()
-        uses: rtCamp/action-slack-notify@v2
+        uses: rtCamp/action-slack-notify@v3
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_MESSAGE: "🚀 Build *${{ github.run_number }}* for *${{ github.repository }}* completed with status: *${{ job.status }}*"
