@@ -129,6 +129,7 @@ jobs:
         with:
           repository: ahmadLshraby/SGT-CC
           slack-message: "A new push was made to the main branch!"
+          channel-id: "C08FLN0U7EK" # Replace with your Slack channel ID
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_BOT_TOKEN: ${{ secrets.Slack_Notification_Token }}
