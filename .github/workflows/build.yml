@@ -145,6 +145,13 @@ jobs:
           -p:BuildIpa=true
           ${{ env.SOLUTION_FILE }}
 
+      - name: Trigger Slack Notification Workflow
+        if: always()
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          event-type: build-completed
+          client-payload: '{ "status": "${{ job.status }}", "branch": "${{ github.ref_name }}", "repo": "${{ github.repository }}", "actor": "${{ github.actor }}" }'
+
       - name: Upload app artifacts
         if: github.event.inputs.upload_to_store == 'true'
         uses: actions/upload-artifact@v4
