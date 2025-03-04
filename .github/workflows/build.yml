@@ -64,6 +64,10 @@ jobs:
         uses: actions/checkout@v4
 
       # 🚀 Notify Slack - Build Started
+      - name: Get Commit Messages
+        run: |
+          echo "COMMIT_MESSAGES=$(git log -1 --pretty=%B)" >> $GITHUB_ENV
+
       - name: Notify Slack - Build Started
         uses: slackapi/slack-github-action@v1.24.0
         with:
@@ -76,13 +80,17 @@ jobs:
                   "fields": [
                     { "title": "Branch", "value": "${{ github.ref }}", "short": true },
                     { "title": "Commit SHA", "value": "${{ github.sha }}", "short": true },
-                    { "title": "Triggered by", "value": "${{ github.actor }}", "short": true }
+                    { "title": "Triggered by", "value": "${{ github.actor }}", "short": true },
+                    { "title": "Commit Message", "value": "${{ env.COMMIT_MESSAGES }}", "short": false }
                   ]
                 }
               ]
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: Measure Start Time
+        run: echo "START_TIME=$(date +%s)" >> $GITHUB_ENV
 
       - name: Print inputs
         run: |
@@ -158,6 +166,14 @@ jobs:
           retention-days: 3
 
       # 🟢 Notify Slack - Build Success
+      - name: Measure End Time
+        run: echo "END_TIME=$(date +%s)" >> $GITHUB_ENV
+
+      - name: Calculate Execution Time
+        run: |
+          EXEC_TIME=$((END_TIME - START_TIME))
+          echo "EXECUTION_TIME=${EXEC_TIME}" >> $GITHUB_ENV
+
       - name: Notify Slack - Build Success
         if: success()
         uses: slackapi/slack-github-action@v1.24.0
@@ -170,7 +186,9 @@ jobs:
                   "color": "#2ecc71",
                   "fields": [
                     { "title": "Branch", "value": "${{ github.ref }}", "short": true },
-                    { "title": "Commit SHA", "value": "${{ github.sha }}", "short": true }
+                    { "title": "Commit SHA", "value": "${{ github.sha }}", "short": true },
+                    { "title": "Version", "value": "${{ env.BUILD_NUMBER }}", "short": true },
+                    { "title": "Execution Time", "value": "${{ env.EXECUTION_TIME }}s", "short": true }
                   ]
                 }
               ]
@@ -192,7 +210,9 @@ jobs:
                   "fields": [
                     { "title": "Branch", "value": "${{ github.ref }}", "short": true },
                     { "title": "Commit SHA", "value": "${{ github.sha }}", "short": true },
-                    { "title": "Triggered by", "value": "${{ github.actor }}", "short": true }
+                    { "title": "Triggered by", "value": "${{ github.actor }}", "short": true },
+                    { "title": "Error", "value": "See logs for details", "short": false },
+                    { "title": "Execution Time", "value": "${{ env.EXECUTION_TIME }}s", "short": true }
                   ]
                 }
               ]
