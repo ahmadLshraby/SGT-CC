@@ -132,7 +132,7 @@ jobs:
               "text": "A new push was made to the repository!",
               "attachments": [
                 {
-                  "color": "#36a64f", # Green color for success
+                  "color": "#36a64f",
                   "title": "Repository: ${{ github.repository }}",
                   "title_link": "https://github.com/${{ github.repository }}",
                   "fields": [
@@ -164,7 +164,7 @@ jobs:
                   ],
                   "footer": "GitHub Actions",
                   "footer_icon": "https://github.githubassets.com/favicon.ico",
-                  "ts": ${{ github.event.head_commit.timestamp }} # Timestamp of the commit
+                  "ts": ${{ github.event.head_commit.timestamp }}
                 }
               ]
             }
