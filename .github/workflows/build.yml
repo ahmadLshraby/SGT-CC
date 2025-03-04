@@ -75,17 +75,7 @@ jobs:
         with:
           payload: >
             {
-              "text": "🚀 Build started for *${{ github.repository }}* Triggered by *${{ github.actor }}*"",
-              "attachments": [
-                {
-                  "color": "#3498db",
-                  "fields": [
-                    { "title": "Branch", "value": "${{ github.ref }}", "short": true },
-                    { "title": "Commit SHA", "value": "${{ github.sha }}", "short": true },
-                    { "title": "Triggered by", "value": "${{ github.actor }}", "short": true }
-                  ]
-                }
-              ]
+              "text": "🚀 Build started for *${{ github.repository }}*, Triggered by *${{ github.actor }}*, Message *${{ COMMIT_MESSAGES }}*"
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
