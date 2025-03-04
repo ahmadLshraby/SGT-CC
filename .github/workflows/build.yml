@@ -166,23 +166,12 @@ jobs:
           echo "EXECUTION_TIME=${EXEC_TIME}" >> $GITHUB_ENV
 
       - name: Notify Slack - Build Success
-        if: success()
+        if: always()
         uses: slackapi/slack-github-action@v1.24.0
         with:
           payload: >
             {
-              "text": "✅ Build Succeeded for *${{ github.repository }}*, Version *${{ github.BUILD_NUMBER }}*, Execution Time *${{ github.EXECUTION_TIME }}*",
-              "attachments": [
-                {
-                  "color": "#2ecc71",
-                  "fields": [
-                    { "title": "Branch", "value": "${{ github.ref }}", "short": true },
-                    { "title": "Commit SHA", "value": "${{ github.sha }}", "short": true },
-                    { "title": "Version", "value": "${{ env.BUILD_NUMBER }}", "short": true },
-                    { "title": "Execution Time", "value": "${{ env.EXECUTION_TIME }}s", "short": true }
-                  ]
-                }
-              ]
+              "text": "✅ Build Succeeded for *${{ github.repository }}*, Version *${{ github.BUILD_NUMBER }}*, Status *${{ job.status }}*, Details *${{ github.event.pull_request.body }}*, Run Number *${{ github.run_number }}*"
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
