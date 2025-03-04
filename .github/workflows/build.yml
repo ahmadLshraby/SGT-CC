@@ -75,7 +75,7 @@ jobs:
         with:
           payload: >
             {
-              "text": "🚀 Build started for *${{ github.repository }}*, Triggered by *${{ github.actor }}*, Message *${{ COMMIT_MESSAGES }}*"
+              "text": "🚀 Build started for *${{ github.repository }}*, Triggered by *${{ github.actor }}*"
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
