@@ -129,23 +129,47 @@ jobs:
         with:
           payload: |
             {
-              "text": "A new push was made to the ${{ github.ref }} branch by ${{ github.actor }}.",
+              "text": "A new push was made to the repository!",
               "attachments": [
                 {
-                  "fallback": "Commit details",
-                  "text": "Commit message: ${{ github.event.head_commit.message }}"
+                  "color": "#36a64f", # Green color for success
+                  "title": "Repository: ${{ github.repository }}",
+                  "title_link": "https://github.com/${{ github.repository }}",
+                  "fields": [
+                    {
+                      "title": "Branch",
+                      "value": "${{ github.ref }}",
+                      "short": true
+                    },
+                    {
+                      "title": "Commit Author",
+                      "value": "${{ github.actor }}",
+                      "short": true
+                    },
+                    {
+                      "title": "Commit Message",
+                      "value": "${{ github.event.head_commit.message }}",
+                      "short": false
+                    },
+                    {
+                      "title": "Commit SHA",
+                      "value": "${{ github.sha }}",
+                      "short": true
+                    },
+                    {
+                      "title": "Commit URL",
+                      "value": "https://github.com/${{ github.repository }}/commit/${{ github.sha }}",
+                      "short": false
+                    }
+                  ],
+                  "footer": "GitHub Actions",
+                  "footer_icon": "https://github.githubassets.com/favicon.ico",
+                  "ts": ${{ github.event.head_commit.timestamp }} # Timestamp of the commit
                 }
               ]
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-
-      # - name: Send Slack Notification
-      #   uses: rtCamp/action-slack-notify@v2.2.1
-      #   with:
-      #     webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
-      #     message: "🚀 Build *${{ github.run_number }}* for *${{ github.repository }}* completed with status: *${{ job.status }}*"
-      #     color: ${{ job.status == 'success' && 'good' || (job.status == 'failure' && 'danger') || 'warning' }}
 
       - name: Trigger Slack Notification Workflow
         if: always()
