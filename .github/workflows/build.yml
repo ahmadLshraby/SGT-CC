@@ -64,9 +64,11 @@ jobs:
         uses: actions/checkout@v4
 
       # 🚀 Notify Slack - Build Started
-      - name: Get Commit Messages
+      - name: Get commit message
         run: |
-          echo "COMMIT_MESSAGES=$(git log -1 --pretty=%B)" >> $GITHUB_ENV
+          echo "COMMIT_MESSAGES<<EOF" >> $GITHUB_ENV
+          git log -1 --pretty=%B >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
 
       - name: Notify Slack - Build Started
         uses: slackapi/slack-github-action@v1.24.0
