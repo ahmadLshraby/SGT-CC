@@ -1,0 +1,86 @@
+name: iOS Build & Deploy
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Select Environment"
+        required: true
+        type: choice
+        options:
+          - Development
+          - Staging
+          - Production
+      run_sonarqube:
+        description: "Enable SonarQube Analysis"
+        required: true
+        default: false
+        type: boolean
+      run_blackduck:
+        description: "Enable BlackDuck Security Scan"
+        required: true
+        default: false
+        type: boolean
+      upload_to_testflight:
+        description: "Upload to TestFlight"
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+
+env:
+  XCODE_VERSION: 15.4
+  CERTIFICATE_BASE64: ${{ secrets.IOS_CERTIFICATE }}
+  PROVISION_PROFILE_BASE64: ${{ secrets.IOS_PROVISION_PROFILE }}
+
+jobs:
+  build:
+    runs-on: macos-14
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set environment variable
+        run: echo "APP_ENV=${{ github.event.inputs.environment }}" >> $GITHUB_ENV
+
+      - name: Decode and install certificates
+        run: |
+          echo "${CERTIFICATE_BASE64}" | base64 --decode > signing.p12
+          echo "${PROVISION_PROFILE_BASE64}" | base64 --decode > profile.mobileprovision
+          security import signing.p12 -k ~/Library/Keychains/login.keychain-db -P "" -T /usr/bin/codesign
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+          mv profile.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
+
+      - name: Select Xcode version
+        run: sudo xcode-select -switch /Applications/Xcode_${{ env.XCODE_VERSION }}.app
+
+      - name: Build iOS App
+        run: |
+          xcodebuild clean archive \
+            -workspace MyApp.xcworkspace \
+            -scheme MyApp \
+            -sdk iphoneos \
+            -archivePath $PWD/build/MyApp.xcarchive \
+            APP_ENV=${{ env.APP_ENV }}
+
+      - name: Run SonarQube Analysis
+        if: github.event.inputs.run_sonarqube == 'true'
+        run: echo "Running SonarQube..."
+
+      - name: Run BlackDuck Security Scan
+        if: github.event.inputs.run_blackduck == 'true'
+        run: echo "Running BlackDuck security scan..."
+
+      - name: Upload to TestFlight
+        if: github.event.inputs.upload_to_testflight == 'true'
+        run: |
+          xcodebuild -exportArchive \
+            -archivePath $PWD/build/MyApp.xcarchive \
+            -exportOptionsPlist exportOptions.plist \
+            -exportPath $PWD/build/
+          xcrun altool --upload-app -f build/MyApp.ipa -t ios --apiKey ${{ secrets.APP_STORE_API_KEY }} --apiIssuer ${{ secrets.APP_STORE_ISSUER_ID }}
